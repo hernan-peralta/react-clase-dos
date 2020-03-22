@@ -6,7 +6,6 @@ import FancyButton from '../small/FancyButton'
 
 
 const Card = ({ value, onClick = () =>{}, show, isFlipped}) =>{
-  
   return(
     <div onClick={onClick} className={cx('card', {'hidden': !show}, {'covered': !isFlipped}, {'locked': isFlipped})}>
       {value}
@@ -15,10 +14,17 @@ const Card = ({ value, onClick = () =>{}, show, isFlipped}) =>{
 }
 
 
+Card.propTypes= {
+  value: PropTypes.oneOf([0, 1]),
+  onClick: PropTypes.func,
+  show: PropTypes.bool.isRequired,
+  isFlipped: PropTypes.bool.isRequired,
+};
+
+
 const WinnerCard = ({ show, onRestart = () => {} }) => {
   return (
     <div className={cx('winner-card', { 'winner-card--hidden': !show })}>
-
       <span className="winner-card-text">
         The game is over!
       </span>
@@ -28,11 +34,17 @@ const WinnerCard = ({ show, onRestart = () => {} }) => {
 };
 
 
+WinnerCard.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onRestart: PropTypes.func,
+}
+
 
 const shuffleCards = (arrayToShuffle, shuffledArray) => {
    arrayToShuffle.forEach(item => shuffledArray.splice(Math.floor(Math.random()*arrayToShuffle.length), 0, item));
    return shuffledArray;
 }
+
 
 const isTheGameOver = (showCards) => {
   return showCards.indexOf(true) === -1 
