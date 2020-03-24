@@ -40,9 +40,10 @@ WinnerCard.propTypes = {
 }
 
 
-const shuffleCards = (arrayToShuffle, shuffledArray) => {
-   arrayToShuffle.forEach(item => shuffledArray.splice(Math.floor(Math.random()*arrayToShuffle.length), 0, item));
-   return shuffledArray;
+const shuffleCards = (arrayToShuffle) => {
+  let newArr = [];
+   arrayToShuffle.forEach(item => newArr.splice(Math.floor(Math.random()*arrayToShuffle.length), 0, item));
+   return newArr;
 }
 
 
@@ -55,7 +56,7 @@ const useMemotestGameState = () =>{
   let gameEnded = false;
   const [ flipped, setFlipped ] = useState(0);
   const possibleChoices = [ 0, 0, 1, 1 ];
-  let numeros = shuffleCards(possibleChoices, [])
+  let numeros = shuffleCards(possibleChoices)
   const [ shuffledNumbers, setShuffledNumbers ] = useState(numeros)
   const [ firstFlippedCard, setFirstFlippedCard ] = useState();
 
