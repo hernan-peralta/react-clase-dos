@@ -1,0 +1,62 @@
+.memotest-row {
+  display: flex;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.locked{
+    pointer-events: none;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 1px solid black;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+}
+
+.covered{
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 1px solid black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+}
+
+.winner-card {
+  height: 25%;
+  width: 25%;
+  position: absolute;
+  background: #365324;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  flex-direction: column;
+  color: black;
+}
+
+.winner-card:not(.winner-card--hidden) {
+  transition: opacity ease-in-out 0.7s;
+}
+
+.winner-card-text {
+  margin-bottom: 10px;
+}
+
+.winner-card--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
