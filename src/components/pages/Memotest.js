@@ -54,16 +54,13 @@ const isTheGameOver = (showCards) => {
 
 const useMemotestGameState = () =>{
   let gameEnded = false;
-  const [ flipped, setFlipped ] = useState(0);
+
   const possibleChoices = [ 0, 0, 1, 1 ];
   let numeros = shuffleCards(possibleChoices)
-  const [ shuffledNumbers, setShuffledNumbers ] = useState(numeros)
+
   const [ firstFlippedCard, setFirstFlippedCard ] = useState();
-
-  //this array is for those cards that are still in play
+  const [ shuffledNumbers, setShuffledNumbers ] = useState(numeros)
   const [ showCards, setShowCards ] = useState([true, true, true, true])
-
-  //this array I keep count of the cards that are flipped
   const [ isFlipped, setIsFlipped ] = useState([false, false, false, false])
 
   if (isTheGameOver(showCards)){
@@ -74,29 +71,26 @@ const useMemotestGameState = () =>{
     let arr = [...isFlipped]
     arr[card] = true
     setIsFlipped(arr)
-    
-    if (flipped === 0){
+
+    if (isFlipped.indexOf(true) === -1){
       setFirstFlippedCard(card)
-      setFlipped(1)
     }
     else{
       if (shuffledNumbers[firstFlippedCard] !== shuffledNumbers[card] && card !== firstFlippedCard){
-        setFlipped(0)
-
         setTimeout(()=>{
-          let arr2 = [...isFlipped]
-          arr2[firstFlippedCard] = false
-          arr2[card] = false
-          setIsFlipped(arr2)
+          let tempArray = [...isFlipped]
+          tempArray[firstFlippedCard] = false
+          tempArray[card] = false
+          setIsFlipped(tempArray)
         }, 1000)
       }
       else{
-        let newArr = [...showCards]
-        newArr[card] = false
-        newArr[firstFlippedCard] = false
-        setShowCards(newArr)
-        
-        setFlipped(0)
+        let tempArray = [...showCards]
+        let tempArray2 = [...isFlipped]
+        tempArray2[card] = tempArray[card] = false
+        tempArray2[firstFlippedCard] = tempArray[firstFlippedCard] = false
+        setIsFlipped(tempArray2)
+        setShowCards(tempArray)
       }
     }
   }
